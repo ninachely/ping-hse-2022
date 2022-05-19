@@ -24,6 +24,7 @@ def fig2img(fig):
 
 
 def construct_df(datapoints: List[Datapoint]) -> pd.DataFrame:
+    datapoints = datapoints[:]
     return pd.DataFrame(
         data={
           "url": map(lambda point: point.url, datapoints),
