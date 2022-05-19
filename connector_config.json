@@ -22,6 +22,17 @@
                     "endpoint": "/api/v5/public/timeapi/v5/public/time"
                 }
             ]
+        },
+        {
+            "exchange_name": "huobi",
+            "exchange_url": "api.huobi.pro",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://api.huobi.pro",
+                    "endpoint": "/v2/settings/common/time"
+                }
+            ]
         }
     ]
 }

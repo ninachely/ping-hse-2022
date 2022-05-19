@@ -1,7 +1,7 @@
 {
     "master_connector_config_path": "connector_config.json",
     "exchanges_list": [
-        "binance", "okx"
+        "binance", "okx", "huobi"
     ],
     "additional_requests": [
         "time"
