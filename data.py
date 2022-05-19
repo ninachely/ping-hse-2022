@@ -4,6 +4,7 @@ from typing import Callable, List, Optional
 import logging as log
 import json
 from dacite import from_dict
+MS_TO_SEC = 1000
 
 
 @dataclass
@@ -38,6 +39,7 @@ class SessionConfig:
     exchanges_list: List[str]
     additional_requests: List[str]
     duration: int
+    interval_ms: int
     run_name_format: str
     data_processors: List[str]     
 

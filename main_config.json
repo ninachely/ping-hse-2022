@@ -5,7 +5,7 @@
     ],
     "additional_requests": [
     ],
-    "duration": 0,
+    "duration": 10,
     "interval_ms": 500,
     "run_name_format": "test",
     "data_processors": [
