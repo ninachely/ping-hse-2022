@@ -1,5 +1,5 @@
 {
-    "master_connector_config_path": "connector_config.json",
+    "master_connector_config_path": "configs/connector_config.json",
     "exchanges_list": [
         "binance", "okx", "huobi", "bitmex", "kucoin", "kraken"
     ],
