@@ -1,0 +1,26 @@
+{
+    "master_connector_config_path": "connector_config.json",
+    "exchanges_list": [
+        "binance", "okx", "huobi"
+    ],
+    "additional_requests": [
+        "time"
+    ],
+    "duration": 100,
+    "interval_ms": 5000,
+    "run_name_format": "test",
+    "data_processors": [
+        {
+            "name": "processors.sample_log",
+            "config": {
+                "repeat_times": 1
+            }
+        },
+        {
+            "name": "processors.csv",
+            "config": {
+                "filename": "out.csv"
+            }
+        }
+    ]
+}

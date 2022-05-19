@@ -1,0 +1,38 @@
+{
+ "exchange_connector_configs":
+    [
+        {
+            "exchange_name": "binance",
+            "exchange_url": "api.binance.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "http://fapi.binance.com",
+                    "endpoint": "/fapi/v1/time"
+                }
+            ]
+        },
+        {
+            "exchange_name": "okx",
+            "exchange_url": "www.okex.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://www.okex.com/",
+                    "endpoint": "/api/v5/public/timeapi/v5/public/time"
+                }
+            ]
+        },
+        {
+            "exchange_name": "huobi",
+            "exchange_url": "api.huobi.pro",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://api.huobi.pro",
+                    "endpoint": "/v2/settings/common/time"
+                }
+            ]
+        }
+    ]
+}
