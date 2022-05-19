@@ -33,6 +33,39 @@
                     "endpoint": "/v2/settings/common/time"
                 }
             ]
+        },
+        {
+            "exchange_name": "bitmex",
+            "exchange_url": "www.bitmex.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://www.bitmex.com",
+                    "endpoint": ""
+                }
+            ]
+        },
+        {
+            "exchange_name": "kucoin",
+            "exchange_url": "api.kucoin.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://api.kucoin.com",
+                    "endpoint": "/api/v1/timestamp"
+                }
+            ]
+        },
+        {
+            "exchange_name": "kraken",
+            "exchange_url": "api.kraken.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "https://api.kraken.com",
+                    "endpoint": "/0/public/SystemStatus"
+                }
+            ]
         }
     ]
 }
