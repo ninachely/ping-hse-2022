@@ -9,6 +9,11 @@
     "interval_ms": 5000,
     "run_name_format": "test",
     "data_processors": [
-        "processors.sample_log"
+        {
+            "name": "processors.sample_log",
+            "config": {
+                "repeat_times": 4
+            }
+        }
     ]
 }

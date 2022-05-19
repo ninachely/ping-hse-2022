@@ -1,10 +1,14 @@
 from abc import abstractmethod
 from concurrent.futures import process
 import importlib
-from typing import List
+from typing import Dict, List
 from data import SessionConfig, Update
+from utils import Config
 
 class DataProcessor:
+
+    def __init__(self, config: Dict) -> None:
+        self.config: Config = Config(**config)
 
     @abstractmethod
     def on_update(self, update: Update): ...
@@ -13,11 +17,11 @@ class DataProcessor:
     def on_terminate(self): ...
 
 
-def import_data_processor(name: str) -> DataProcessor:
+def import_data_processor(name: str, config: Dict) -> DataProcessor:
     module = importlib.import_module(name)
     class_ = getattr(module, 'Module')
     assert(issubclass(class_, DataProcessor))
-    return class_()
+    return class_(config)
 
 
 class MasterDataProcessor(DataProcessor):
@@ -26,7 +30,7 @@ class MasterDataProcessor(DataProcessor):
 
     def __init__(self, config: SessionConfig) -> None:
         self.processors = [
-            import_data_processor(name) for name in config.data_processors
+            import_data_processor(p['name'], p['config']) for p in config.data_processors
         ]
 
 

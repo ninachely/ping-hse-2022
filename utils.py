@@ -25,3 +25,9 @@ class RestClient:
                         urlencode(data).encode(), sha256).hexdigest()
         data['signature'] = signature
         return request_type(base_url + endpoint, params=data, headers=self.headers).content.decode("utf-8")
+
+
+class Config:
+
+    def __init__(self, **entries):
+        self.__dict__.update(entries)

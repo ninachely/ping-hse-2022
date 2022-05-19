@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from enum import Enum
-from typing import List, Optional, Union
+from typing import Dict, List, Optional, Union
 import logging as log
 import json
 from requests import Response
@@ -49,7 +49,7 @@ class SessionConfig:
     duration: int
     interval_ms: int
     run_name_format: str
-    data_processors: List[str]    
+    data_processors: List[Dict]    
 
 
 
@@ -61,7 +61,7 @@ class PingResult:
         self.config = config
         self.ts = ts
  
- 
+
 @dataclass
 class Update:
     type: UpdateType
