@@ -1,14 +1,14 @@
 {
+    "master_connector_config_path": "connector_config.json",
     "exchanges_list": [
-        "binance", "okex", "huobi"
+        "binance", "okx"
     ],
     "additional_requests": [
-        "fetch_order_book"
     ],
     "duration": 0,
     "interval_ms": 500,
     "run_name_format": "test",
     "data_processors": [
-        "pdf", "csv", "json", "web", "database", "txt", "xlsx"
+        "processors.sample_log"
     ]
 }

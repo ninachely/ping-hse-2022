@@ -1,7 +1,6 @@
 from abc import abstractmethod
-from data import MainConfig
-from utils import import_data_processor
-
+import importlib
+from data import SessionConfig
 
 class DataProcessor:
 
@@ -12,9 +11,24 @@ class DataProcessor:
     def on_terminate(): ...
 
 
-class MasterDataProcessor:
+def import_data_processor(name: str) -> DataProcessor:
+    module = importlib.import_module(name)
+    class_ = getattr(module, 'Module')
+    assert(issubclass(class_, DataProcessor))
+    return class_()
 
-    def __init__(self, config: MainConfig) -> None:
+
+class MasterDataProcessor(DataProcessor):
+
+    def __init__(self, config: SessionConfig) -> None:
         self.processors = [
-            import_data_processor() for name in config.outputs
+            import_data_processor(name) for name in config.data_processors
         ]
+
+
+    def on_update(self):
+        pass
+
+
+    def on_terminate(self):
+        pass

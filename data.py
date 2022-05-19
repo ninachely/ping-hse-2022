@@ -33,12 +33,13 @@ class MasterConnectorConfig:
 
 
 @dataclass
-class MainConfig:
+class SessionConfig:
+    master_connector_config_path: str
     exchanges_list: List[str]
     additional_requests: List[str]
     duration: int
     run_name_format: str
-    outputs: List[str]     
+    data_processors: List[str]     
 
 
 def read_master_connector_config(filename: Path) -> MasterConnectorConfig:
@@ -48,9 +49,9 @@ def read_master_connector_config(filename: Path) -> MasterConnectorConfig:
         from_dict(data_class=ExchangeConnectorConfig, data=connector_config) 
         for connector_config in connector_configs
     ])
-    
 
-def read_main_config(filename: Path) -> MainConfig:
+
+def read_session_config(filename: Path) -> SessionConfig:
     log.info(f"Reading master connector config from file {filename}")
     config = json.load(open(filename))
-    return from_dict(data_class=MainConfig, data=config)
+    return from_dict(data_class=SessionConfig, data=config)

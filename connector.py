@@ -11,7 +11,7 @@ class ExchangeConnector:
         self.config = config
 
 
-    def ping(self):
+    def ping(self) -> PingResult:
         exit_code, raw_data, _ = (ping["-c", 1, self.config.exchange_url]).run(retcode=None)
         return PingResult(exit_code, raw_data)
 
@@ -29,7 +29,8 @@ class MasterConnector:
             in config.exchange_connector_configs
         }
 
-    def ping(self, exchange_name: str) -> PingResult:
+
+    def get_exchange_connector(self, exchange_name: str) -> ExchangeConnector:
         if exchange_name not in self.exchange_connectors:
             raise ValueError(f"not found exchange with name = {exchange_name}")
-        return self.exchange_connectors.get(exchange_name).ping()
+        return self.exchange_connectors.get(exchange_name)

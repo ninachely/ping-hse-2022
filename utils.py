@@ -1,11 +1,8 @@
 from hashlib import new, sha256
 from pathlib import Path
-from sqlite3 import DatabaseError
 from time import time_ns
 from typing import Callable, Dict, Optional
 from urllib.parse import urlencode
-import importlib
-from processor import Module
 
 
 class PingResult:
@@ -37,10 +34,3 @@ class RestClient:
                         urlencode(data).encode(), sha256).hexdigest()
         data['signature'] = signature
         return request_type(self.base_url + endpoint, params=data, headers=self.headers).content.decode("utf-8")
-
-
-def import_data_processor(name: str) -> DataProcessor:
-    module = importlib.import_module(name)
-    my_class = getattr(module, '')
-
-    my_instance = my_class()

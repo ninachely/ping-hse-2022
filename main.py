@@ -1,10 +1,10 @@
-from sqlite3 import connect
 from connector import *
-from data import read_main_config, read_master_config
+from data import SessionConfig, read_session_config
 import argparse
 import logging as log
-
-from processor import DataProcessor
+from pathlib import Path
+from processor import MasterDataProcessor
+from session import Session
 
 
 def main():
@@ -14,11 +14,14 @@ def main():
     parser.add_argument('config', type=Path)
     args = parser.parse_args()
 
-    config = read_main_config(args.config)
-    data_processor = DataProcessor(config)
+    config = read_session_config(args.config)
+    data_processor = MasterDataProcessor(config)
     session = Session(config)
 
     try:
-        session.run()
+        session.run(data_processor)
     finally:
         data_processor.on_terminate()
+
+if __name__ == "__main__":
+    main()
