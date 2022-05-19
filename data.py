@@ -1,10 +1,13 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, List, Optional
+from enum import Enum
+from typing import List, Optional, Union
 import logging as log
 import json
+from requests import Response
 from dacite import from_dict
-MS_TO_SEC = 1000
+
+MS_TO_SEC = 0.001
 
 
 @dataclass
@@ -14,10 +17,15 @@ class RestClientConfig:
     
 
 @dataclass
-class CommandConfig:
+class RequestConfig:
     name: str
     base_url: str
     endpoint: str
+
+
+class UpdateType(Enum):
+    PING_RESULT = 1
+    REQUEST_RESPONSE = 2
 
 
 @dataclass
@@ -25,7 +33,7 @@ class ExchangeConnectorConfig:
     exchange_name: str
     exchange_url: str
     rest_client_config: Optional[RestClientConfig]
-    requests: List[CommandConfig]
+    requests: List[RequestConfig]
 
 
 @dataclass
@@ -41,7 +49,24 @@ class SessionConfig:
     duration: int
     interval_ms: int
     run_name_format: str
-    data_processors: List[str]     
+    data_processors: List[str]    
+
+
+
+class PingResult:
+    def __init__(self, config: ExchangeConnectorConfig, ts: float, exit_code: int, report: str) -> None:
+        self.success: bool = exit_code == 0
+        self.latency: Optional[float] = None if not self.success \
+            else float(report.split('\n')[1].split()[-2].split('=')[-1])
+        self.config = config
+        self.ts = ts
+ 
+ 
+@dataclass
+class Update:
+    type: UpdateType
+    inner: Union[PingResult, Response]
+
 
 
 def read_master_connector_config(filename: Path) -> MasterConnectorConfig:

@@ -16,10 +16,10 @@ def main():
 
     config = read_session_config(args.config)
     data_processor = MasterDataProcessor(config)
-    session = Session(config)
+    session = Session(config, data_processor)
 
     try:
-        session.run(data_processor)
+        session.run()
     finally:
         data_processor.on_terminate()
 

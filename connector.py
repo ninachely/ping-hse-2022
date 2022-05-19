@@ -1,7 +1,9 @@
+from email.mime import base
+from time import time
 from plumbum import FG
 from plumbum.cmd import ping
-from data import ExchangeConnectorConfig, MasterConnectorConfig
-from utils import PingResult
+from data import ExchangeConnectorConfig, MasterConnectorConfig, Update, UpdateType, PingResult
+from utils import RestClient
 CONNECTOR_CONFIG_FILE_PATH = 'connector_config.json'
 
 
@@ -9,14 +11,19 @@ class ExchangeConnector:
 
     def __init__(self, config: ExchangeConnectorConfig):
         self.config = config
+        self.rest_client = RestClient(
+            skey=config.rest_client_config.skey,
+            pkey=config.rest_client_config.pkey
+        ) if config.rest_client_config else None
 
 
-    def ping(self) -> PingResult:
+    def ping(self) -> Update:
+        ts = time()
         exit_code, raw_data, _ = (ping["-c", 1, self.config.exchange_url]).run(retcode=None)
-        return PingResult(exit_code, raw_data)
+        return Update(type=UpdateType.PING_RESULT, inner=PingResult(self.config, ts, exit_code, raw_data))
 
 
-    def execute_custom_request(self, request_type: int):
+    def execute_custom_request(self, request_type: str):
         pass
 
 

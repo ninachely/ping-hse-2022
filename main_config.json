@@ -5,8 +5,8 @@
     ],
     "additional_requests": [
     ],
-    "duration": 10,
-    "interval_ms": 500,
+    "duration": 100,
+    "interval_ms": 5000,
     "run_name_format": "test",
     "data_processors": [
         "processors.sample_log"
