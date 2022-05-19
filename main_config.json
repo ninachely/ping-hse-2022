@@ -1,21 +1,14 @@
 {
     "master_connector_config_path": "connector_config.json",
     "exchanges_list": [
-        "binance", "okx", "huobi"
+        "binance", "okx", "huobi", "bitmex", "kucoin", "kraken"
     ],
     "additional_requests": [
-        "time"
     ],
-    "duration": 10,
-    "interval_ms": 500,
+    "duration": 15,
+    "interval_ms": 100,
     "run_name_format": "test",
     "data_processors": [
-        {
-            "name": "processors.sample_log",
-            "config": {
-                "repeat_times": 0
-            }
-        },
         {
             "name": "processors.csv",
             "config": {
@@ -25,6 +18,12 @@
         {
             "name": "processors.console_statistics",
             "config": {}
+        },
+        {
+            "name": "processors.pdf",
+            "config": {
+                "pdf_path": "stats.pdf"
+            }
         }
     ]
 }

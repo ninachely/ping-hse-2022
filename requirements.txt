@@ -2,3 +2,7 @@ dacite
 plumbum
 requests
 flask
+pillow
+matplotlib
+seaborn
+pandas
