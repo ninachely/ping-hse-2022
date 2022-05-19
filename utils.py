@@ -1,3 +1,4 @@
+from ast import Pass
 from hashlib import new, sha256
 from pathlib import Path
 from time import time_ns
@@ -7,11 +8,8 @@ from urllib.parse import urlencode
 
 class RestClient:
 
-    def __init__(self, pkey: str, skey: str):
-        self.secret = skey
-        self.headers = {
-            "X-MBX-APIKEY": pkey,
-        }
+    def __init__(self):
+        pass
 
     @staticmethod
     def time_ms():

@@ -40,4 +40,5 @@ class MasterDataProcessor(DataProcessor):
 
 
     def on_terminate(self):
-        pass
+        for processor in self.processors:
+            processor.on_terminate()

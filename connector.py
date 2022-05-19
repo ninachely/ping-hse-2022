@@ -11,11 +11,7 @@ class ExchangeConnector:
 
     def __init__(self, config: ExchangeConnectorConfig):
         self.config = config
-        self.rest_client = RestClient(
-            skey=config.rest_client_config.skey,
-            pkey=config.rest_client_config.pkey
-        ) if config.rest_client_config else None
-
+        self.rest_client = RestClient()
 
     def ping(self) -> Update:
         ts = time()

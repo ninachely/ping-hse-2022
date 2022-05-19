@@ -12,6 +12,5 @@ class Module(DataProcessor):
             for i in range(self.config.repeat_times):
                 print(update.inner.latency, update.inner.ts, update.inner.config.exchange_name)
 
-    def on_terminate():
+    def on_terminate(self):
         print('Goodbye!')
-        pass
