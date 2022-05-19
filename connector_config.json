@@ -1,0 +1,16 @@
+{
+ "exchange_connector_configs":
+    [
+        {
+            "exchange_name": "binance",
+            "exchange_url": "api.binance.com",
+            "requests": [
+                {
+                    "name": "time",
+                    "base_url": "fapi.binance.com",
+                    "endpoint": "/fapi/v1/time"
+                }
+            ]
+        }
+    ]
+}

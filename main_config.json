@@ -1,0 +1,14 @@
+{
+    "exchanges_list": [
+        "binance", "okex", "huobi"
+    ],
+    "additional_requests": [
+        "fetch_order_book"
+    ],
+    "duration": 0,
+    "interval_ms": 500,
+    "run_name_format": "test",
+    "data_processors": [
+        "pdf", "csv", "json", "web", "database", "txt", "xlsx"
+    ]
+}
