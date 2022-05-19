@@ -1,5 +1,4 @@
-from connector import *
-from data import SessionConfig, read_session_config
+from data import read_session_config
 import argparse
 import logging as log
 from pathlib import Path
@@ -9,7 +8,7 @@ from session import Session
 
 def main():
     log.basicConfig(format='[%(levelname)s %(asctime)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S',
-                        level=log.INFO)
+                    level=log.INFO)
     parser = argparse.ArgumentParser()
     parser.add_argument('config', type=Path)
     args = parser.parse_args()
@@ -22,6 +21,7 @@ def main():
         session.run()
     finally:
         data_processor.on_terminate()
+
 
 if __name__ == "__main__":
     main()

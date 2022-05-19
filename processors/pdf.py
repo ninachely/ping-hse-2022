@@ -2,13 +2,13 @@
 This module generates a PDF report with images and statistics.
 """
 
-from dataclasses import dataclass
 from typing import Dict, List
 from data import Update, UpdateType
 from processor import DataProcessor
 from processors.visuals import construct_df, heatmap, plot_of_time_ping, scatterplot_of_time_ping, Datapoint
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+
 
 class Module(DataProcessor):
 
@@ -20,7 +20,7 @@ class Module(DataProcessor):
         if update.type == UpdateType.PING_RESULT:
             self.datapoints.append(Datapoint(
                 update.config.exchange_url, update.inner.latency, update.ts
-                )
+            )
             )
 
     def on_terminate(self):
@@ -31,4 +31,3 @@ class Module(DataProcessor):
         heatmap(df, ax[2])
         with PdfPages(self.config.pdf_path) as pdf:
             pdf.savefig(fig)
-        

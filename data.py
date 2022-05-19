@@ -14,7 +14,7 @@ MS_TO_SEC = 0.001
 class RestClientConfig:
     skey: str
     pkey: str
-    
+
 
 @dataclass
 class RequestConfig:
@@ -49,8 +49,7 @@ class SessionConfig:
     duration: int
     interval_ms: int
     run_name_format: str
-    data_processors: List[Dict]    
-
+    data_processors: List[Dict]
 
 
 class PingResult:
@@ -58,7 +57,7 @@ class PingResult:
         self.success: bool = exit_code == 0
         self.latency: Optional[float] = None if not self.success \
             else float(report.split('\n')[1].split()[-2].split('=')[-1])
- 
+
 
 @dataclass
 class Update:
@@ -69,12 +68,11 @@ class Update:
     request_name: Optional[str]
 
 
-
 def read_master_connector_config(filename: Path) -> MasterConnectorConfig:
     log.info(f"Reading master connector config from file {filename}")
     connector_configs = json.load(open(filename))['exchange_connector_configs']
     return MasterConnectorConfig(exchange_connector_configs=[
-        from_dict(data_class=ExchangeConnectorConfig, data=connector_config) 
+        from_dict(data_class=ExchangeConnectorConfig, data=connector_config)
         for connector_config in connector_configs
     ])
 

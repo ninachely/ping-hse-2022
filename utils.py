@@ -1,10 +1,7 @@
-from pathlib import Path
 from time import time_ns
 from typing import Callable, Dict, Optional
-from requests import Response
-from datetime import timedelta
-
 from data import MS_TO_SEC
+
 
 class RestClient:
 

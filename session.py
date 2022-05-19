@@ -1,4 +1,3 @@
-import logging as log
 from time import sleep, time
 from connector import MasterConnector
 from data import MS_TO_SEC, SessionConfig, read_master_connector_config
@@ -13,7 +12,6 @@ class Session:
         )
         self.config = config
         self.master_data_processor = data_processor
-
 
     def run(self) -> None:
         connectors = [

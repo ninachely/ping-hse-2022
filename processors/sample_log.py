@@ -2,6 +2,7 @@ from typing import Dict
 from data import Update, UpdateType
 from processor import DataProcessor
 
+
 class Module(DataProcessor):
 
     def __init__(self, config: Dict) -> None:

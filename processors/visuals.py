@@ -26,9 +26,9 @@ def fig2img(fig):
 def construct_df(datapoints: List[Datapoint]) -> pd.DataFrame:
     return pd.DataFrame(
         data={
-          "url": map(lambda point: point.url, datapoints),
-          "ts": map(lambda point: point.ts - min(datapoints, key=lambda x: x.ts).ts, datapoints),
-          "latency": map(lambda point: point.latency, datapoints),
+            "url": map(lambda point: point.url, datapoints),
+            "ts": map(lambda point: point.ts - min(datapoints, key=lambda x: x.ts).ts, datapoints),
+            "latency": map(lambda point: point.latency, datapoints),
         }
     )
 
@@ -38,10 +38,12 @@ def scatterplot_of_time_ping(df: pd.DataFrame, ax: plt.Axes) -> None:
 
 
 def plot_of_time_ping(df: pd.DataFrame, ax: plt.Axes) -> None:
-   sns.lineplot(data=df, x="ts", y="latency", hue="url", markers=True, dashes=False, ax=ax).set_title("Зависимость пинга от времени подачи")
+    sns.lineplot(data=df, x="ts", y="latency", hue="url", markers=True, dashes=False, ax=ax).set_title("Зависимость пинга от времени подачи")
 
 
 PERCENTILES = [0, 5, 25, 50, 75, 90, 95, 99, 100]
+
+
 def generate_statistics(df: pd.DataFrame) -> pd.DataFrame:
     endpoints = set(df['url'].tolist())
     arr = []
@@ -57,5 +59,4 @@ def heatmap(df: pd.DataFrame, ax: plt.Axes) -> None:
     stats = generate_statistics(df)
     piv = pd.pivot_table(stats, values="latency", columns=["percentile"], index=["url"], fill_value=0)
     sns.heatmap(piv, square=True, cmap='RdYlGn_r', annot=True, fmt=".3f", ax=ax)
-    ax.title.set_text(f"Ping statistics heatmap for every exchange")
-
+    ax.title.set_text(f'{"Ping statistics heatmap for every exchange"}')
