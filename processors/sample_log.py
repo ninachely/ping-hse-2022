@@ -10,7 +10,9 @@ class Module(DataProcessor):
     def on_update(self, update: Update):
         if update.type == UpdateType.PING_RESULT:
             for i in range(self.config.repeat_times):
-                print(update.inner.latency, update.inner.ts, update.inner.config.exchange_name)
+                print("ping", update.inner.latency, update.ts, update.config.exchange_name)
+        else:
+            print(update.request_name, update.inner, update.ts, update.config.exchange_name)
 
     def on_terminate(self):
         print('Goodbye!')

@@ -54,18 +54,19 @@ class SessionConfig:
 
 
 class PingResult:
-    def __init__(self, config: ExchangeConnectorConfig, ts: float, exit_code: int, report: str) -> None:
+    def __init__(self, exit_code: int, report: str) -> None:
         self.success: bool = exit_code == 0
         self.latency: Optional[float] = None if not self.success \
             else float(report.split('\n')[1].split()[-2].split('=')[-1])
-        self.config = config
-        self.ts = ts
  
 
 @dataclass
 class Update:
     type: UpdateType
+    config: ExchangeConnectorConfig
+    ts: float
     inner: Union[PingResult, Response]
+    request_name: Optional[str]
 
 
 

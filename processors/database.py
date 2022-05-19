@@ -1,7 +1,6 @@
 from typing import Dict
 from data import Update, UpdateType
 from processor import DataProcessor
-import sqlalchemy
 
 class Module(DataProcessor):
 

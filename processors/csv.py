@@ -11,7 +11,7 @@ class Module(DataProcessor):
 
     def on_update(self, update: Update):
         if update.type == UpdateType.PING_RESULT:
-                self.file.write(f'{update.inner.config.exchange_name},{update.inner.latency},{update.inner.ts}\n')
+                self.file.write(f'{update.config.exchange_name},{update.inner.latency},{update.ts}\n')
 
     def on_terminate(self):
         self.file.close()

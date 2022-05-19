@@ -1,10 +1,10 @@
-from ast import Pass
-from hashlib import new, sha256
 from pathlib import Path
 from time import time_ns
 from typing import Callable, Dict, Optional
-from urllib.parse import urlencode
+from requests import Response
+from datetime import timedelta
 
+from data import MS_TO_SEC
 
 class RestClient:
 
@@ -15,14 +15,11 @@ class RestClient:
     def time_ms():
         return time_ns() // 10 ** 6
 
-    def request(self, base_url: str, request_type: Callable, endpoint: str, data: Optional[Dict] = None) -> str:
+    def request(self, base_url: str, request_type: Callable, endpoint: str, data: Optional[Dict] = None) -> float:
         if data is None:
             data = dict()
         data['timestamp'] = self.time_ms()
-        signature = new(self.secret.encode(),
-                        urlencode(data).encode(), sha256).hexdigest()
-        data['signature'] = signature
-        return request_type(base_url + endpoint, params=data, headers=self.headers).content.decode("utf-8")
+        return request_type(base_url + endpoint, params=data).elapsed.total_seconds() / MS_TO_SEC
 
 
 class Config:

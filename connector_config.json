@@ -7,7 +7,7 @@
             "requests": [
                 {
                     "name": "time",
-                    "base_url": "fapi.binance.com",
+                    "base_url": "http://fapi.binance.com",
                     "endpoint": "/fapi/v1/time"
                 }
             ]

@@ -1,9 +1,12 @@
 from email.mime import base
+import re
 from time import time
+from xmlrpc.client import ResponseError
 from plumbum import FG
 from plumbum.cmd import ping
 from data import ExchangeConnectorConfig, MasterConnectorConfig, Update, UpdateType, PingResult
 from utils import RestClient
+from requests import get
 CONNECTOR_CONFIG_FILE_PATH = 'connector_config.json'
 
 
@@ -16,11 +19,16 @@ class ExchangeConnector:
     def ping(self) -> Update:
         ts = time()
         exit_code, raw_data, _ = (ping["-c", 1, self.config.exchange_url]).run(retcode=None)
-        return Update(type=UpdateType.PING_RESULT, inner=PingResult(self.config, ts, exit_code, raw_data))
+        return Update(type=UpdateType.PING_RESULT, config=self.config, ts=ts, inner=PingResult(exit_code, raw_data), request_name=None)
 
 
-    def execute_custom_request(self, request_type: str):
-        pass
+    def execute_custom_request(self, name: str) -> Update:
+        ts = time()
+        request = next(x for x in self.config.requests if x.name == name)
+        response = self.rest_client.request(
+            request.base_url, get, request.endpoint, {}
+        )
+        return Update(type=UpdateType.REQUEST_RESPONSE, config=self.config, ts=ts, inner=response, request_name=name)
 
 
 class MasterConnector:
