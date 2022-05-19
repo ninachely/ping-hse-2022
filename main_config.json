@@ -5,7 +5,7 @@
     ],
     "additional_requests": [
     ],
-    "duration": 15,
+    "duration": 1500,
     "interval_ms": 100,
     "run_name_format": "test",
     "data_processors": [
@@ -24,6 +24,10 @@
             "config": {
                 "pdf_path": "stats.pdf"
             }
+        },
+        {
+            "name": "web_server.app",
+            "config": {}
         }
     ]
 }
