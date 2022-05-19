@@ -6,14 +6,14 @@
     "additional_requests": [
         "time"
     ],
-    "duration": 100,
-    "interval_ms": 5000,
+    "duration": 10,
+    "interval_ms": 500,
     "run_name_format": "test",
     "data_processors": [
         {
             "name": "processors.sample_log",
             "config": {
-                "repeat_times": 1
+                "repeat_times": 0
             }
         },
         {
@@ -21,6 +21,10 @@
             "config": {
                 "filename": "out.csv"
             }
+        },
+        {
+            "name": "processors.console_statistics",
+            "config": {}
         }
     ]
 }
