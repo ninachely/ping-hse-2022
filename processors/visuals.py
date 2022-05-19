@@ -27,7 +27,7 @@ def construct_df(datapoints: List[Datapoint]) -> pd.DataFrame:
     return pd.DataFrame(
         data={
           "url": map(lambda point: point.url, datapoints),
-          "ts": map(lambda point: point.ts, datapoints),
+          "ts": map(lambda point: point.ts - min(datapoints, key=lambda x: x.ts).ts, datapoints),
           "latency": map(lambda point: point.latency, datapoints),
         }
     )
