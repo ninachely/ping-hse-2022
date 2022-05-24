@@ -34,7 +34,7 @@
 
 ## Project setup
 
-<code>python3 main.py main_config.json</code>
+<code>python3 main.py ../configs/main_config.json</code>
 
 <code>localhost:8080/data</code>
 
